@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+</head>
+<body>
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+
+    <script>
+        function login() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            const storedUser = localStorage.getItem("user");
+            if (!storedUser) {
+                alert("No registered user. Please sign up first!");
+                return;
+            }
+
+            const user = JSON.parse(storedUser);
+            if (username === user.username && password === user.password) {
+                alert("Login successful!");
+            } else {
+                alert("Invalid credentials!");
+            }
+        }
+
+        function register() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            localStorage.setItem("user", JSON.stringify({ username, password }));
+            alert("User registered! Now you can log in.");
+        }
+    </script>
+    <br>
+    <button onclick="register()">Register</button>
+</body>
+</html>
